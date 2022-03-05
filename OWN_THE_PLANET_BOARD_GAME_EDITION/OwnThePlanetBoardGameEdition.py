@@ -872,11 +872,12 @@ def main() -> int:
         # Incrementing the value of new_game.turn
         new_game.turn += 1
 
-        print("Your stats: " + str(new_game.player))
-        print("CPU's stats: " + str(new_game.cpu))
+        print("Your stats:\n\n" + str(new_game.player))
+        print("CPU's stats:\n\n" + str(new_game.cpu))
 
         # Checking whether it is player's or CPU's turn
         if new_game.turn % 2 == 1:
+            new_game.player.gain_turn_reward()
             print("It is your turn to roll the dice!")
             print("Enter 'ROLL' to roll the dice.")
             print("Enter anything else to save game data and quit the game.")
@@ -972,6 +973,7 @@ def main() -> int:
             else:
                 break
         else:
+            new_game.cpu.gain_turn_reward()
             print("It is CPU's turn to roll the dice!")
             new_game.cpu.roll_dice(new_game)
             curr_tile: Tile = new_game.board.get_tiles()[new_game.cpu.location]
